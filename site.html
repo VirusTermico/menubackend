@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="cars">Estado do Pedido:</label>
+
+    <select id="estado" onchange="pegaEstado()"  >
+      <option value="pronto">Pronto</option>
+      <option value="entregue">Entregue</option>
+      <option value="cancelar">Cancelar</option>
+    </select>
+    <script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  socket.emit('join', `order_11`);
+
+  socket.on('orderUpdated',(data)=>{
+
+    console.log(data)
+
+  })
+  function pegaEstado(){
+    let estado=document.getElementById("estado").value
+            console.log(estado)
+            socket.emit('join', `order_${estado}`);
+
+}
+</script>
+</body>
+</html>
